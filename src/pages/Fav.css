@@ -1,0 +1,20 @@
+body {
+    background-image: url('../assests/images/netflixbg.png'); /* Using the specified image path */
+    background-size: cover; /* Ensures the image covers the entire viewport */
+    background-position: center; /* Centers the background image */
+    background-attachment: fixed; /* Keeps the background image fixed when scrolling */
+    background-repeat: no-repeat; /* Prevents repeating the background image */
+    /* margin: 0;
+    padding: 0; */
+    height: 100vh; /* Ensures the body covers the full height of the viewport */
+    overflow-x: hidden; /* Prevents horizontal scrolling */
+}
+
+.but{
+    background-color: rgba(255, 255, 255, 0.2); /* Transparent white */
+    backdrop-filter: blur(10px); /* Apply blur effect */
+    border-radius: 10px; /* Rounded corners */
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Subtle border */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    padding: 20px;
+  }

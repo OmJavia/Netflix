@@ -1,0 +1,17 @@
+.my-background {
+    /* background-color: lightblue; */
+    /* background-image: url('../assests/netflixbg.png');  */
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+  }
+  .moviecon{
+    /* background-color: red; */
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+  .car{
+    display: flex;
+    justify-content: space-around;
+
+  }

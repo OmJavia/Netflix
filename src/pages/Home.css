@@ -1,0 +1,36 @@
+.movie-card {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .movie-card .card-details {
+    display: none;
+    position: absolute;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    width: 100%;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    z-index: 2;
+  }
+  
+  .movie-card:hover .card-details {
+    display: block;
+    animation: slideUp 0.3s ease-out;
+  }
+  
+  @keyframes slideUp {
+    from {
+      bottom: -100%;
+    }
+    to {
+      bottom: 0;
+    }
+  }
+  
+  .movie-card:hover .card-img {
+    transform: scale(1.1); /* Optional: Adds zoom effect on hover */
+    transition: transform 0.3s ease;
+  }
+  

@@ -1,0 +1,11 @@
+.heading {
+    color: #fff;
+    font-size: 16px;
+    transition: all 0.3s ease;
+  }
+  
+  .heading:hover {
+    color: #ff0000; 
+    font-size: 17px; /* Increase font size on hover */
+  }
+  
