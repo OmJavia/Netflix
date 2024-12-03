@@ -1,0 +1,14 @@
+.my-background {
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+  }
+  .moviecon{
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+  .car{
+    display: flex;
+    justify-content: space-around;
+
+  }

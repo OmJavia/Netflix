@@ -10,6 +10,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import { FaUserCircle, FaSearch, FaSignOutAlt, FaUser } from 'react-icons/fa';
 import { MdManageAccounts, MdHelpCenter } from "react-icons/md";
 import { IoSettings } from "react-icons/io5";
+import Login from '../pages/Login';
 import './Navbar.css'; 
 
 
@@ -45,11 +46,12 @@ function NavScrollExample() {
   };
 
   const handleClose = () => setShow(false);
+  
 
   return (
     <Navbar expand="lg" className="bg-black" style={{ zIndex: 100 }}>
       <Container fluid>
-        <Navbar.Brand href="/" style={{ color: '#FF0000', fontWeight: "bolder"}}>NETFLIX</Navbar.Brand>
+        <Navbar.Brand href="Home" style={{ color: '#FF0000', fontWeight: "bolder"}}>NETFLIX</Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav
@@ -84,7 +86,7 @@ function NavScrollExample() {
                 <Dropdown.Item href="#/action-3"><MdHelpCenter /> Help Center</Dropdown.Item>
                 <Dropdown.Item href="#/action-4"><IoSettings /> Settings</Dropdown.Item>
                 <Dropdown.Divider />
-                <Dropdown.Item href="#/action-5"><FaSignOutAlt /> Sign Out</Dropdown.Item>
+                <Dropdown.Item href="/"><FaSignOutAlt /> Sign Out</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
           </Form>
