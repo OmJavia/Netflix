@@ -1,37 +1,84 @@
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate for redirection
 import './Login.css';
-import Container from "react-bootstrap/Container";
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
+import { FaUserAlt, FaLock } from 'react-icons/fa';
+import logo from "../assests/images/netflix-icon.png"
 
-function Login() {
+const Login = () => {
+  const [text, setText] = useState(''); // State for username
+  const [password, setPassword] = useState(''); // State for password
+  const navigate = useNavigate(); // Hook for navigation
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // Check if credentials are correct
+    if (text === '1234' && password === '1234') {
+      console.log("Login successful");
+      navigate('/Home'); // Redirect to dashboard on success
+    } else {
+      console.log("Invalid credentials");
+      alert("Invalid login ID or password"); // Alert on failure
+    }
+  };
 
   return (
     <>
-    <Navbar expand="lg" className="bg-transparent" style={{ zIndex: 100 }}>
-      <Container fluid>
-        <Navbar.Brand href="#" style={{ color: '#FF0000', fontWeight: "bolder"}}><h2>Netflix</h2></Navbar.Brand>
-        <Navbar.Toggle aria-controls="navbarScroll" />
-        <Navbar.Collapse id="navbarScroll">
-          <Nav
-            className="me-auto my-2 my-lg-0"
-            style={{ maxHeight: '100px' }}
-            navbarScroll>
-          </Nav>
-          <Form className="d-flex">
+    
+    <div className="login-background">
+      <div className="login-overlay">
+        <img src={logo} className="login-logo" />
+        <div className="login-container">
+          <h2 className="login-title">Sign In</h2>
+          <form className="login-form" onSubmit={handleSubmit}>
+          <div className="input-container">
+              <FaUserAlt className="input-icon" />
+              <input
+                type="text"
+                placeholder="Email or mobile number"
+                className="login-input"
+                value={text} // Bind state
+                onChange={(e) => setText(e.target.value)} // Update state
+                required
+              />
+            </div>
+          <div className="input-container">
+              <FaLock className="input-icon" />
+              <input
+                type="password"
+                placeholder="Password"
+                className="login-input"
+                value={password} // Bind state
+                onChange={(e) => setPassword(e.target.value)} // Update state
+                required
+              />
+              </div>
+            <div className="remember-me">
+              <input type="checkbox" id="remember" />
+              <label htmlFor="remember">Remember me</label>
+            </div>
+            <button type="submit" className="login-button">
+              Sign In
+            </button>
+            <div className="login-options">
+              
+              <span>OR</span><br /> <br />
+              <button type="button" className="signin-code-button">
+                Use a sign-in code
+              </button>
+            </div>
+            <div className="login-links">
+              <a href="#" className="forgot-password">
+                Forgot password?
+              </a>
+            </div>
             
-            <Button variant="danger">Login</Button>
-          </Form>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
-      <Container className="but d-flex align-items-center  flex-column mt-5 ">
-        <h1 className="text-white d-flex justify-content-center ">Login Page </h1>
-
-      </Container>
+          </form>
+      </div>
+    </div>
+    </div>
     </>
   );
-}
+};
 
 export default Login;
