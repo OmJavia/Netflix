@@ -1,4 +1,4 @@
-# Netflix App
+# Netflix Application
 
 ![image](https://github.com/user-attachments/assets/b1c65ea0-f39e-4c4c-8f48-afe703f89495)
 
