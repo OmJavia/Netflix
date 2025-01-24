@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate for redirection
 import './Login.css';
 import { FaUserAlt, FaLock } from 'react-icons/fa';
-import logo from "../assests/images/netflix-icon.png"
+import logo from "../../assests/images/netflix-icon.png"
 
 const Login = () => {
   const [text, setText] = useState(''); // State for username
@@ -15,7 +15,7 @@ const Login = () => {
     // Check if credentials are correct
     if (text === '1234' && password === '1234') {
       console.log("Login successful");
-      navigate('/Home'); // Redirect to dashboard on success
+      navigate('/Profile'); // Redirect to dashboard on success
     } else {
       console.log("Invalid credentials");
       alert("Invalid login ID or password"); // Alert on failure

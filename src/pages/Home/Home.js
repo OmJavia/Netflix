@@ -1,4 +1,4 @@
-import Navigation from "../components/Navbar";
+import Navigation from "../../components/Navbar/Navbar";
 import './Home.css';
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -7,8 +7,10 @@ import Row from "react-bootstrap/esm/Row";
 import Container from "react-bootstrap/esm/Container";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import Carousel from 'react-bootstrap/Carousel';
 
 function Home() {
+  const [carouselData, setCarouselData] = useState([]); // State for carousel data
   const [data, setData] = useState([]);
   const [poster, setPoster] = useState([]);
   const [year, setYear] = useState([]);
@@ -17,6 +19,7 @@ function Home() {
 
   const API_KEY = 'c848f0d8';
   const BASE_URL = 'https://www.omdbapi.com';
+  const year2 = '2023 '; // Filter for the carousel
 
   const handleClose = () => setShow(false);
   const handleShow = async (movieTitle) => {
@@ -26,11 +29,12 @@ function Home() {
   };
 
   useEffect(() => {
-    handleClick();
+    fetchMovies();
+    fetchCarouselData();
   }, []);
 
-  async function handleClick() {
-    let apiData = await axios.get(`${BASE_URL}?apikey=${API_KEY}&s=movie`);
+  async function fetchMovies() {
+    let apiData = await axios.get(`${BASE_URL}?apikey=${API_KEY}&s=series`);
     const movies = apiData.data.Search;
     const movieTitles = movies.map((movie) => movie.Title);
     const moviePoster = movies.map((movie) => movie.Poster);
@@ -40,14 +44,47 @@ function Home() {
     setYear(movieYear);
   }
 
+  async function fetchCarouselData() {
+    try {
+      const response = await axios.get(`${BASE_URL}?apikey=${API_KEY}&s=series&y=${year2}`);
+      setCarouselData(response.data.Search || []); // Using `Search` from API response
+    } catch (error) {
+      console.error("Error fetching carousel data:", error);
+    }
+  }
+
   return (
     <>
       <Navigation />
+
+      {/* Carousel Section 
+
+      
+      <Container fluid>
+      <Carousel>
+        {carouselData.map((item, index) => (
+          <Carousel.Item key={index}>
+            <img
+              className="d-block w-100"
+              style={{ height: "400px", objectFit: "cover" }}
+              src={item.Poster} // Use the poster URL from the API
+              alt={item.Title || `Slide ${index + 1}`}
+            />
+            <Carousel.Caption>
+              <h3>{item.Title || `Slide ${index + 1}`}</h3>
+              <p>{`Year: ${item.Year}`}</p>
+            </Carousel.Caption>
+          </Carousel.Item>
+        ))}
+      </Carousel>
+      </Container> */}
+
 
       <Container className="but d-flex align-items-center flex-column mt-5">
         <h1 className="text-white d-flex justify-content-center">Movies & Series</h1>
       </Container>
 
+      {/* Movie Cards */}
       <Container className="but2 d-flex justify-content-center">
         <Row className="justify-content-center">
           {data.map((title, index) => (

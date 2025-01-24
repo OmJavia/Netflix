@@ -1,5 +1,5 @@
 body {
-    background-image: url('../assests/images/netflixbg.png'); /* Using the specified image path */
+    background-image: url('../../assests/images/netflixbg.png'); /* Using the specified image path */
     background-size: cover; /* Ensures the image covers the entire viewport */
     background-position: center; /* Centers the background image */
     background-attachment: fixed; /* Keeps the background image fixed when scrolling */

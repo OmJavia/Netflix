@@ -2,7 +2,7 @@
 .login-background {
   position: relative;
   height: 100vh;
-  background: url('../assests/images/netflixbg.png') center/cover no-repeat;
+  background: url('../../assests/images/netflixbg.png') center/cover no-repeat;
 }
 
 .login-options {
