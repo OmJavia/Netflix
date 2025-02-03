@@ -1,11 +1,12 @@
 .heading {
     color: #fff;
-    font-size: 16px;
+    font-size: 20px;
     transition: all 0.3s ease;
+    margin-right: 12px;
   }
   
   .heading:hover {
     color: #ff0000; 
-    font-size: 17px; /* Increase font size on hover */
+    font-size: 20px; /* Increase font size on hover */
   }
   

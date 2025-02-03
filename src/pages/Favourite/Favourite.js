@@ -15,7 +15,7 @@ function Favourites() {
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [show, setShow] = useState(false);
 
-  const API_KEY = 'c848f0d8';
+  const API_KEY = '318203f';
   const BASE_URL = 'https://www.omdbapi.com';
   const year2 = '2019'
 
@@ -49,8 +49,7 @@ function Favourites() {
       <Container className="but d-flex align-items-center flex-column mt-5">
         <h1 className="text-white d-flex justify-content-center">My Favourites</h1>
       </Container>
-
-      <Container className="but2 d-flex justify-content-center">
+      <Container className="d-flex justify-content-center">
         <Row className="justify-content-center">
           {data.map((title, index) => (
             <Card
@@ -77,40 +76,39 @@ function Favourites() {
       </Container>
 
       {/* Modal for Movie Details and Trailer */}
-      <Container>
-        <Modal show={show} onHide={handleClose} size="lg" centered>
-          <Modal.Header closeButton>
-            <Modal.Title>{selectedMovie?.Title || "Movie Details"}</Modal.Title>
-          </Modal.Header>
-          <Modal.Body className="d-flex flex-column align-items-center">
-            {selectedMovie?.imdbID && selectedMovie?.imdbID !== 'N/A' ? (
-              <div style={{ width: '100%', position: 'relative', paddingTop: '56.25%' }}>
-                <iframe
-                  src={`https://www.youtube.com/embed/${selectedMovie?.imdbID}`}
-                  style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  title="Movie Trailer"
-                ></iframe>
-              </div>
-            ) : (
-              <p>Trailer not available</p>
-            )}
-            <div className="movie-details mt-3">
-              <p><strong>Year:</strong> {selectedMovie?.Year}</p>
-              <p><strong>Genre:</strong> {selectedMovie?.Genre}</p>
-              <p><strong>Plot:</strong> {selectedMovie?.Plot}</p>
-              <p><strong>Director:</strong> {selectedMovie?.Director}</p>
-              <p><strong>Actors:</strong> {selectedMovie?.Actors}</p>
-              <p><strong>Rating:</strong> {selectedMovie?.imdbRating}</p>
-            </div>
-          </Modal.Body>
-          <Modal.Footer className="d-flex justify-content-center">
-            <Button variant="outline-success" onClick={handleClose}>Close</Button>
-          </Modal.Footer>
-        </Modal>
-      </Container>
+      <Container className="d-flex flex-column justify-content-center align-items-center">
+      <Modal show={show} onHide={handleClose} size="lg" centered>
+      <Modal.Header closeButton>
+        <Modal.Title>{selectedMovie?.Title || "Movie Details"}</Modal.Title>
+      </Modal.Header>
+      <Modal.Body className="d-flex flex-column align-items-center">
+        {selectedMovie?.Poster && selectedMovie?.Poster !== 'N/A' ? (
+          <div style={{ width: '100%', textAlign: 'center' }}>
+            <img
+              src={selectedMovie.Poster} // Correctly display the image
+              alt={`${selectedMovie?.Title} Poster`}
+              style={{ width: '250px', height: 'auto', maxHeight: '500px', objectFit: 'contain' }}
+            />
+          </div>
+        ) : (
+          <p>No Image Available</p>
+        )}
+        <div className="movie-details mt-3" style={{ width: '100%' }}>
+          <p><strong>Year:</strong> {selectedMovie?.Year}</p>
+          <p><strong>Genre:</strong> {selectedMovie?.Genre}</p>
+          <p><strong>Plot:</strong> {selectedMovie?.Plot}</p>
+          <p><strong>Director:</strong> {selectedMovie?.Director}</p>
+          <p><strong>Actors:</strong> {selectedMovie?.Actors}</p>
+          <p><strong>Rating:</strong> {selectedMovie?.imdbRating}</p>
+        </div>
+      </Modal.Body>
+      <Modal.Footer className="d-flex justify-content-center">
+        <Button variant="outline-success" onClick={handleClose}>Close</Button>
+      </Modal.Footer>
+      
+  </Modal>
+</Container>
+
     </>
   );
 }

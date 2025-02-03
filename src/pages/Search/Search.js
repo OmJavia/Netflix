@@ -1,25 +1,20 @@
-import Navigation from "../../components/Navbar/Navbar";
-import './Home.css';
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
-import Card from 'react-bootstrap/Card';
-import Row from "react-bootstrap/esm/Row";
-import Container from "react-bootstrap/esm/Container";
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
-import Carousel from 'react-bootstrap/Carousel';
+import { useLocation } from "react-router-dom";  // Import useLocation to read query params
+import { Container, Row, Card, Button, Modal } from "react-bootstrap";
+import Navigation from "../../components/Navbar/Navbar"; // Assuming you have Navbar component
 
-function Home() {
-  const [carouselData, setCarouselData] = useState([]); // State for carousel data
+function Search() {
   const [data, setData] = useState([]);
   const [poster, setPoster] = useState([]);
   const [year, setYear] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [show, setShow] = useState(false);
 
-  const API_KEY = '318203f';
-  const BASE_URL = 'https://www.omdbapi.com';
-  const year2 = '2023 '; // Filter for the carousel
+  const API_KEY = "318203f";
+  const BASE_URL = "https://www.omdbapi.com";
+  
+  const location = useLocation();  // Use location to get query params
 
   const handleClose = () => setShow(false);
   const handleShow = async (movieTitle) => {
@@ -29,60 +24,41 @@ function Home() {
   };
 
   useEffect(() => {
-    fetchMovies();
-    fetchCarouselData();
-  }, []);
+    const queryParams = new URLSearchParams(location.search);  // Get query parameters
+    const query = queryParams.get("query");
+    if (query) {
+      fetchMovies(query);
+    }
+  }, [location]);  // Re-run the effect whenever the location changes
 
-  async function fetchMovies() {
-    let apiData = await axios.get(`${BASE_URL}?apikey=${API_KEY}&s=series`);
-    const movies = apiData.data.Search;
-    const movieTitles = movies.map((movie) => movie.Title);
-    const moviePoster = movies.map((movie) => movie.Poster);
-    const movieYear = movies.map((movie) => movie.Year);
-    setData(movieTitles);
-    setPoster(moviePoster);
-    setYear(movieYear);
-  }
-
-  async function fetchCarouselData() {
+  async function fetchMovies(query) {
     try {
-      const response = await axios.get(`${BASE_URL}?apikey=${API_KEY}&s=series&y=${year2}`);
-      setCarouselData(response.data.Search || []); // Using `Search` from API response
+      const apiData = await axios.get(`${BASE_URL}?apikey=${API_KEY}&s=${query}`);
+      const movies = apiData.data.Search;
+
+      if (movies) {
+        const movieTitles = movies.map((movie) => movie.Title);
+        const moviePoster = movies.map((movie) => movie.Poster);
+        const movieYear = movies.map((movie) => movie.Year);
+        setData(movieTitles);
+        setPoster(moviePoster);
+        setYear(movieYear);
+      } else {
+        setData([]);
+      }
     } catch (error) {
-      console.error("Error fetching carousel data:", error);
+      console.error("Error fetching movie data:", error);
     }
   }
 
   return (
     <>
-      <Navigation />
-
-      
-      {/* <Container fluid>
-      <Carousel>
-        {carouselData.map((item, index) => (
-          <Carousel.Item key={index}>
-            <img
-              className="d-block w-100"
-              style={{ height: "400px", objectFit: "cover" }}
-              src={item.Poster} // Use the poster URL from the API
-              alt={item.Title || `Slide ${index + 1}`}
-            />
-            <Carousel.Caption>
-              <h3>{item.Title || `Slide ${index + 1}`}</h3>
-              <p>{`Year: ${item.Year}`}</p>
-            </Carousel.Caption>
-          </Carousel.Item>
-        ))}
-      </Carousel>
-      </Container> */}
-
+      <Navigation /> {/* Your Navigation Component */}
 
       <Container className="but d-flex align-items-center flex-column mt-5">
-        <h1 className="text-white d-flex justify-content-center">Movies & Series</h1>
+        <h1 className="text-white d-flex justify-content-center">Your Search</h1>
       </Container>
 
-      {/* Movie Cards */}
       <Container className="but2 d-flex justify-content-center">
         <Row className="justify-content-center">
           {data.map((title, index) => (
@@ -146,4 +122,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Search;

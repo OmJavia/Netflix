@@ -11,6 +11,7 @@ import { FaUserCircle, FaSearch, FaSignOutAlt, FaUser } from 'react-icons/fa';
 import { MdManageAccounts, MdHelpCenter } from "react-icons/md";
 import { IoSettings } from "react-icons/io5";
 import './Navbar.css'; 
+import { Navigate } from 'react-router-dom';
 
 
 const API_KEY = '318203f';
@@ -18,20 +19,23 @@ const BASE_URL = 'https://www.omdbapi.com';
 
 function NavScrollExample() {
   const [searchTerm, setSearchTerm] = useState('');
-  const [ setMovies] = useState([]); 
+  const [movies, setMovies] = useState([]); 
   const [searchVisible, setSearchVisible] = useState(false);
   const [show, setShow] = useState(false);
 
   // const toggleSearch = () => setSearchVisible(!searchVisible);
 
   const handleClick = async () => {
+    
     // Toggle the search bar visibility
     setSearchVisible(!searchVisible);
+    console.log(searchVisible);
     
     if (searchVisible) {
       // If search bar is visible, fetch movie data
       try {
         let apiData = await axios.get(`${BASE_URL}?apikey=${API_KEY}&s=${searchTerm}`);
+        console.log(apiData.data);
         const movies = apiData.data.Search;
         if (movies) {
           setMovies(movies);
@@ -50,7 +54,7 @@ function NavScrollExample() {
   return (
     <Navbar expand="lg" className="bg-transparent" style={{ zIndex: 100 }}>
       <Container fluid>
-        <Navbar.Brand href="Home" style={{ color: '#FF0000', fontWeight: "bolder", marginRight: 10}}>NETFLIX</Navbar.Brand>
+        <Navbar.Brand href="Home" style={{ color: '#FF0000', fontWeight: "bolder", marginRight: 20, fontSize:"24px"}}>NETFLIX</Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav
