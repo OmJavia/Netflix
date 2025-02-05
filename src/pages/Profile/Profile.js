@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Profile.css";
 
@@ -9,12 +9,15 @@ import profile3 from "../../assests/images/profile3.jpg";
 import profile4 from "../../assests/images/profile4.jpg";
 import defaultProfile from "../../assests/images/default.jpg";
 
+// Import the Netflix profile click sound
+import netflixClickSound from "../../assests/sound/Start.mp3";
+
 const ProfilePage = () => {
   const [profiles, setProfiles] = useState([
     { id: 1, name: "Comedy", image: profile1 },
     { id: 2, name: "Thrilling", image: profile2 },
-    { id: 3, name: "Horror",  image: profile3 },
-    { id: 4, name: "Suspense",  image: profile4 },
+    { id: 3, name: "Horror", image: profile3 },
+    { id: 4, name: "Suspense", image: profile4 },
   ]);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -22,35 +25,18 @@ const ProfilePage = () => {
   const navigate = useNavigate();
 
   const handleProfileClick = (name) => {
+    // Play the Netflix profile click sound
+    const audio = new Audio(netflixClickSound);
+    audio.play();
+
     console.log(`Navigating to home page for ${name}`);
     navigate("/Home");
-  };
-
-  const handleAddProfile = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setNewProfile({ ...newProfile, [name]: value });
-  };
-
-  const handleSaveProfile = (e) => {
-    e.preventDefault();
-    const newProfileData = {
-      id: profiles.length + 1,
-      name: newProfile.name,
-      image: defaultProfile,
-    };
-    setProfiles([...profiles, newProfileData]);
-    setNewProfile({ name: "" });
-    setIsModalOpen(false);
   };
 
   return (
     <div className="profile-page">
       <h1>Who's watching?</h1>
-      <br/>
+      <br />
       <div className="profiles">
         {profiles.map((profile) => (
           <div
@@ -72,7 +58,7 @@ const ProfilePage = () => {
             <small>{profile.taste}</small>
           </div>
         ))}
-        <div className="add-profile-card" onClick={handleAddProfile}>
+        <div className="add-profile-card" onClick={() => setIsModalOpen(true)}>
           <div className="add-icon">+</div>
           <p>Add Profile</p>
         </div>
@@ -86,14 +72,26 @@ const ProfilePage = () => {
             onClick={(e) => e.stopPropagation()} // Prevent modal close on inner click
           >
             <h2>Add New Profile</h2>
-            <form onSubmit={handleSaveProfile}>
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                const newProfileData = {
+                  id: profiles.length + 1,
+                  name: newProfile.name,
+                  image: defaultProfile,
+                };
+                setProfiles([...profiles, newProfileData]);
+                setNewProfile({ name: "" });
+                setIsModalOpen(false);
+              }}
+            >
               <label>
                 Name:
                 <input
                   type="text"
                   name="name"
                   value={newProfile.name}
-                  onChange={handleInputChange}
+                  onChange={(e) => setNewProfile({ name: e.target.value })}
                   required
                 />
               </label>

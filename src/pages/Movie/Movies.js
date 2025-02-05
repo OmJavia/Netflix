@@ -7,6 +7,7 @@ import Row from "react-bootstrap/esm/Row";
 import Container from "react-bootstrap/esm/Container";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import netflixClickSound from "../../assests/sound/click.mp3";
 
 function Movie() {
   const [data, setData] = useState([]);
@@ -20,6 +21,8 @@ function Movie() {
 
   const handleClose = () => setShow(false);
   const handleShow = async (movieTitle) => {
+    const audio = new Audio(netflixClickSound);
+            audio.play();
     const response = await axios.get(`${BASE_URL}?apikey=${API_KEY}&t=${movieTitle}`);
     setSelectedMovie(response.data);
     setShow(true);

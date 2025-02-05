@@ -11,7 +11,6 @@ import { FaUserCircle, FaSearch, FaSignOutAlt, FaUser } from 'react-icons/fa';
 import { MdManageAccounts, MdHelpCenter } from "react-icons/md";
 import { IoSettings } from "react-icons/io5";
 import './Navbar.css'; 
-import { Navigate } from 'react-router-dom';
 
 
 const API_KEY = '318203f';
@@ -19,7 +18,7 @@ const BASE_URL = 'https://www.omdbapi.com';
 
 function NavScrollExample() {
   const [searchTerm, setSearchTerm] = useState('');
-  const [movies, setMovies] = useState([]); 
+  const [setMovies] = useState([]); 
   const [searchVisible, setSearchVisible] = useState(false);
   const [show, setShow] = useState(false);
 

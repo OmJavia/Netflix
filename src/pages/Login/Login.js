@@ -4,6 +4,8 @@ import './Login.css';
 import { FaUserAlt, FaLock } from 'react-icons/fa';
 import logo from "../../assests/images/netflix-icon.png"
 
+import netflixClickSound from "../../assests/sound/coin-drop.mp3";
+
 const Login = () => {
   const [text, setText] = useState(''); // State for username
   const [password, setPassword] = useState(''); // State for password
@@ -15,6 +17,8 @@ const Login = () => {
     // Check if credentials are correct
     if (text === '1234' && password === '1234') {
       console.log("Login successful");
+      const audio = new Audio(netflixClickSound);
+          audio.play();
       navigate('/Profile'); // Redirect to dashboard on success
     } else {
       console.log("Invalid credentials");
@@ -27,7 +31,7 @@ const Login = () => {
     
     <div className="login-background">
       <div className="login-overlay">
-        <img src={logo} className="login-logo" />
+        <img src={logo} alt='img-login' className="login-logo" />
         <div className="login-container">
           <h2 className="login-title">Sign In</h2>
           <form className="login-form" onSubmit={handleSubmit}>

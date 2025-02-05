@@ -3,6 +3,7 @@ import axios from "axios";
 import { useLocation } from "react-router-dom";  // Import useLocation to read query params
 import { Container, Row, Card, Button, Modal } from "react-bootstrap";
 import Navigation from "../../components/Navbar/Navbar"; // Assuming you have Navbar component
+import netflixClickSound from "../../assests/sound/click.mp3";
 
 function Search() {
   const [data, setData] = useState([]);
@@ -17,7 +18,10 @@ function Search() {
   const location = useLocation();  // Use location to get query params
 
   const handleClose = () => setShow(false);
+
   const handleShow = async (movieTitle) => {
+    const audio = new Audio(netflixClickSound);
+            audio.play();
     const response = await axios.get(`${BASE_URL}?apikey=${API_KEY}&t=${movieTitle}`);
     setSelectedMovie(response.data);
     setShow(true);
