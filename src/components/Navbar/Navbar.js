@@ -28,18 +28,20 @@ function NavScrollExample() {
     
     // Toggle the search bar visibility
     setSearchVisible(!searchVisible);
-    console.log(searchVisible);
     
     if (searchVisible) {
       // If search bar is visible, fetch movie data
       try {
+        
         let apiData = await axios.get(`${BASE_URL}?apikey=${API_KEY}&s=${searchTerm}`);
-        console.log(apiData.data);
+        console.log(apiData.data.Search);
         const movies = apiData.data.Search;
         if (movies) {
           setMovies(movies);
+          console.log("Fetching movie data...");
         } else {
           setMovies([]);
+          console.log("No movie data found!");
         }
       } catch (error) {
         console.error("Error fetching movie data:", error);

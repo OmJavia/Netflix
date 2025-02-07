@@ -9,20 +9,26 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Carousel from 'react-bootstrap/Carousel';
 import netflixClickSound from "../../assests/sound/click.mp3";
-import image1 from "../../assests/images/shark.webp"
-import image2 from "../../assests/images/avengers.jpg"
-import image3 from "../../assests/images/mrbean.webp"
-import image4 from "../../assests/images/pokemon.webp"
-import image5 from "../../assests/images/Spiderman.webp"
+import image1 from "../../assests/images/fast 9.jpg"
+import image2 from "../../assests/images/Dune.jpg"
+import image3 from "../../assests/images/money.jpg"
+import image4 from "../../assests/images/Army.jpg"
+import image5 from "../../assests/images/queen.jpg"
+import image6 from "../../assests/images/dunke.jpg"
+import image7 from "../../assests/images/intes.jpg"
+import image8 from "../../assests/images/king.jpg"
+import image9 from "../../assests/images/Spiderman.webp"
+import image10 from "../../assests/images/boss.jpg"
+import image11 from "../../assests/images/crime.jpg"
+import image12 from "../../assests/images/fly.jpg"
+import image13 from "../../assests/images/found.jpg"
+import image14 from "../../assests/images/lady.jpg"
 
+const imagedata = [ {Poster: image7}, {Poster: image4}, {Poster: image2}, 
+  {Poster: image14}, {Poster: image10}, {Poster: image6}, {Poster: image1},
+  {Poster: image8}, {Poster: image9}, {Poster: image5}, {Poster: image11},
+  {Poster: image12}, {Poster: image13}, {Poster: image3}];
 
-const carouselData = [
-  { Poster: image1, Title: "Sharks" },
-  { Poster: image2, Title: "Avengers" },
-  { Poster: image3, Title: "Mr. Bean" },
-  { Poster: image4, Title: "Pokemon" },
-  { Poster: image5, Title: "Spiderman" },
-];
 
 function Home() {
   const [data, setData] = useState([]);
@@ -63,14 +69,13 @@ function Home() {
       <Container fluid className="p-0">
         {/* Movie Carousel */}
         <Carousel>
-          {carouselData.map((item, index) => (
+          {imagedata.map((item, index) => (
             <Carousel.Item key={index} onClick={() => handleShow(item.Title)}>
               <img
                 className="d-block w-100"
                 style={{
-                  width: "990px",
-                  height: "650px",
-                  objectFit: "contain",
+                  height: "650px",  
+                  objectFit: "cover",
                   borderRadius: "10px",
                 }}
                 src={item.Poster}
