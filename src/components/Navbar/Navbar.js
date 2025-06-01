@@ -11,6 +11,7 @@ import { FaUserCircle, FaSearch, FaSignOutAlt, FaUser } from 'react-icons/fa';
 import { MdManageAccounts, MdHelpCenter } from "react-icons/md";
 import { IoSettings } from "react-icons/io5";
 import './Navbar.css'; 
+import { useNavigate } from 'react-router-dom';
 
 
 const API_KEY = '318203f';
@@ -18,35 +19,24 @@ const BASE_URL = 'https://www.omdbapi.com';
 
 function NavScrollExample() {
   const [searchTerm, setSearchTerm] = useState('');
-  const [setMovies] = useState([]); 
   const [searchVisible, setSearchVisible] = useState(false);
   const [show, setShow] = useState(false);
+  const navigate = useNavigate();
 
-  // const toggleSearch = () => setSearchVisible(!searchVisible);
+  // Toggle search visibility
+  const toggleSearch = () => setSearchVisible(!searchVisible);
 
-  const handleClick = async () => {
-    
+  // Handle search submission
+  const handleSearch = (e) => {
+    e.preventDefault(); // Prevent form submission (page refresh)
+    if (searchTerm.trim()) {
+      navigate(`/Search?query=${encodeURIComponent(searchTerm.trim())}`);
+    }
+  };
+
+  const handleClick = () => {
     // Toggle the search bar visibility
     setSearchVisible(!searchVisible);
-    
-    if (searchVisible) {
-      // If search bar is visible, fetch movie data
-      try {
-        
-        let apiData = await axios.get(`${BASE_URL}?apikey=${API_KEY}&s=${searchTerm}`);
-        console.log(apiData.data.Search);
-        const movies = apiData.data.Search;
-        if (movies) {
-          setMovies(movies);
-          console.log("Fetching movie data...");
-        } else {
-          setMovies([]);
-          console.log("No movie data found!");
-        }
-      } catch (error) {
-        console.error("Error fetching movie data:", error);
-      }
-    }
   };
 
   const handleClose = () => setShow(false);
@@ -66,7 +56,7 @@ function NavScrollExample() {
             <Nav.Link href="Series" className='heading'>Series</Nav.Link>
             <Nav.Link href="Favourite" className='heading'>My Favourites</Nav.Link>
           </Nav>
-          <Form className="d-flex">
+          <Form className="d-flex" onSubmit={handleSearch}>
             {searchVisible && (
               <Form.Control
                 type="search"
