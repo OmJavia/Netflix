@@ -68,7 +68,7 @@ function Home() {
 
       <Container fluid className="p-0">
         {/* Movie Carousel */}
-        <Carousel>
+        <Carousel fade interval={5000}>
           {imagedata.map((item, index) => (
             <Carousel.Item key={index} onClick={() => handleShow(item.Title)}>
               <img

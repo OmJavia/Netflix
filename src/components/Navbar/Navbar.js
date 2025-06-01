@@ -11,7 +11,7 @@ import { FaUserCircle, FaSearch, FaSignOutAlt, FaUser } from 'react-icons/fa';
 import { MdManageAccounts, MdHelpCenter } from "react-icons/md";
 import { IoSettings } from "react-icons/io5";
 import './Navbar.css'; 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 
 const API_KEY = '318203f';
@@ -22,6 +22,7 @@ function NavScrollExample() {
   const [searchVisible, setSearchVisible] = useState(false);
   const [show, setShow] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation(); // Get current location
 
   // Toggle search visibility
   const toggleSearch = () => setSearchVisible(!searchVisible);
@@ -45,16 +46,16 @@ function NavScrollExample() {
   return (
     <Navbar expand="lg" className="bg-transparent" style={{ zIndex: 100 }}>
       <Container fluid>
-        <Navbar.Brand href="Home" style={{ color: '#FF0000', fontWeight: "bolder", marginRight: 20, fontSize:"24px"}}>NETFLIX</Navbar.Brand>
+        <Navbar.Brand href="/Home" style={{ color: '#FF0000', fontWeight: "bolder", marginRight: 20, fontSize:"24px"}}>NETFLIX</Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav
             className="me-auto my-2 my-lg-0"
             style={{ maxHeight: '100px' }}
             navbarScroll>
-            <Nav.Link href="Movies" className='heading'>Movies</Nav.Link>
-            <Nav.Link href="Series" className='heading'>Series</Nav.Link>
-            <Nav.Link href="Favourite" className='heading'>My Favourites</Nav.Link>
+            <Nav.Link href="/Movies" className={`heading ${location.pathname === '/Movies' ? 'active' : ''}`}>Movies</Nav.Link>
+            <Nav.Link href="/Series" className={`heading ${location.pathname === '/Series' ? 'active' : ''}`}>Series</Nav.Link>
+            <Nav.Link href="/Favourite" className={`heading ${location.pathname === '/Favourite' ? 'active' : ''}`}>My Favourites</Nav.Link>
           </Nav>
           <Form className="d-flex" onSubmit={handleSearch}>
             {searchVisible && (

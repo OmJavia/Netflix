@@ -9,4 +9,28 @@
     color: #ff0000; 
     font-size: 21px; /* Increase font size on hover */
   }
+
+  .heading.active {
+    color: #ff0000; /* Netflix red for active link */
+    font-weight: bold; /* Make active link bold */
+    border-bottom: 2px solid #ff0000; /* Underline active link */
+  }
+
+  /* Style for the search input */
+  .form-control[type="search"] {
+    border-radius: 20px; /* More rounded corners */
+    border: 1px solid #555; /* Subtle border */
+    background-color: #333; /* Darker background */
+    color: #fff; /* White text */
+  }
+
+  .form-control[type="search"]::placeholder {
+    color: #aaa; /* Lighter placeholder text */
+  }
+
+  /* Hover effect for user profile dropdown toggle */
+  #dropdown-user:hover {
+    background-color: #555 !important; /* Darker background on hover */
+    border-color: #777 !important; /* Slightly lighter border on hover */
+  }
   
